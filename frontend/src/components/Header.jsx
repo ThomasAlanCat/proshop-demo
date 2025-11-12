@@ -7,6 +7,7 @@ import { logout } from "../slices/authSlice";
 import SearchBox from "./SearchBox";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { resetCart } from "../slices/cartSlice";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -19,9 +20,9 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      console.log("😎😱😍");
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(resetCart());
       navigate("/login");
     } catch (error) {
       console.log(error);

@@ -36,7 +36,7 @@ const PlaceOrderScreen = () => {
         totalPrice: cart.totalPrice,
       }).unwrap();
       dispatch(clearCartItems());
-      console.log()
+      console.log();
       navigate(`/order/${res._id}`);
     } catch (error) {
       toast.error(error);
@@ -137,7 +137,9 @@ const PlaceOrderScreen = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                {error && <Message variant="danger">{error}</Message>}
+                {error && (
+                  <Message variant="danger">{error.data.message}</Message>
+                )}
               </ListGroup.Item>
 
               <ListGroup.Item>

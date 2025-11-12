@@ -3,11 +3,19 @@ import { FaTimes } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { useGetOrdersQuery } from "../../slices/ordersApiSlice";
+import { useGetUsersQuery } from "../../slices/usersApiSlice";
 import { Link } from "react-router-dom";
 
 const OrderListScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  //console.log(orders);
+
+  const { data: users } = useGetUsersQuery();
+
+  const findUserAndReturn = (id) => {
+    const user = users.find((user) => user._id === id);
+    return user.name;
+  };
+
   return (
     <>
       <h1>Orders</h1>
@@ -32,7 +40,8 @@ const OrderListScreen = () => {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
+                {/* <td>{order.user && order.user.name}</td> */}
+                <td>{findUserAndReturn(order.user)}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>${order.totalPrice}</td>
                 <td>

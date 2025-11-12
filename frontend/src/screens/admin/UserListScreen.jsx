@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 const UserListScreen = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
+  console.log(users);
 
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
